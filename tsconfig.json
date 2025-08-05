@@ -3,7 +3,7 @@
     // Environment setup & latest features
     "lib": ["ESNext", "DOM", "DOM.Iterable"],
     "target": "ESNext",
-    "module": "nodenext",
+    "module": "esnext",
     "moduleDetection": "force",
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
@@ -13,7 +13,7 @@
     "allowJs": true,
 
     // Bundler mode
-    "moduleResolution": "nodenext",
+    "moduleResolution": "node",
     "allowImportingTsExtensions": true,
     "verbatimModuleSyntax": true,
     "noEmit": true,

@@ -1,15 +1,15 @@
 import * as esbuild from "esbuild";
-const { solidPlugin } = require('esbuild-plugin-solid');
+import { solidPlugin } from 'esbuild-plugin-solid';
 
-let ctx = await esbuild.context({
-    entryPoints: [ "./client.tsx" ],
+esbuild.context({
+    entryPoints: [ "./pages/app.tsx" ],
     bundle: true,
     outdir: "./public/js",
     sourcemap: true,
+    minify: true,
     plugins: [solidPlugin()]
-});
-
-await ctx.watch();
-
-const { host, port } = await ctx.serve({ servedir: "./public" });
-console.log(`EsBuild is runing on host: ${host}:${port}`);
+}).then((ctx)=>{
+    ctx.watch().then(()=>{ 
+        console.log("ESBuild is watching for changes"); 
+    }).catch((error)=> console.error(error));
+}).catch((error)=> console.error(error));

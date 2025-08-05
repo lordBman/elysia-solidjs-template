@@ -3,9 +3,8 @@ import { Elysia } from 'elysia';
 
 let app = new Elysia();
 
-app = app.use(staticPlugin({ assets: "public", prefix: "/assets" }));
-
-app = app.get("/", ()=>{
+app.use(staticPlugin({ assets: "public", prefix: "/assets" }));
+app.get("/", ()=>{
     const html = `<html lang="en">
         <head>
             <title>Connect | App</title>
@@ -15,13 +14,26 @@ app = app.get("/", ()=>{
         </head>
         <body>
             <main id="root"></main>
-            <script src="/assets/js/client.js"></script>
+            <script src="/assets/js/app.js"></script>
         </body>
     </html>`;
 
     return new Response(html, {
         headers: {
             'Content-Type': 'text/html',
+            'Cache-Control': 'no-cache, no-store, must-revalidate',
+            'Pragma': 'no-cache',
+            'Expires': '0'
+        }
+    });
+});
+
+app.get("/api", ()=>{
+    const init = { message: "Welcome to API"};
+
+    return new Response(JSON.stringify(init), {
+        headers: {
+            'Content-Type': 'application/json',
             'Cache-Control': 'no-cache, no-store, must-revalidate',
             'Pragma': 'no-cache',
             'Expires': '0'

@@ -1,11 +1,20 @@
-import type { Component } from "solid-js";
+import { render } from "solid-js/web";
+import { createSignal, type Component } from "solid-js";
 
 const App: Component = () =>{
+    const [count, setCount] = createSignal(0);
+
+    const increase = () => setCount(value => value + 1);
+
     return (
-        <div>
-            I am working
+        <div style={{ display: "flex", "justify-content": "center", "align-items": "center", "flex-direction": "column", gap: "5px" }}>
+            Click the button below to increase the value
+            <div>{count()}</div>
+            <div>
+                <button onclick={increase}>click me please</button>
+            </div>
         </div>
     );
 }
 
-export default App;
+render(() => <App />, document.getElementById("root")!);
